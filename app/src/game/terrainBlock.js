@@ -2,7 +2,9 @@ define([
     'jquery'
 ], function( $ ){
     var terrainProcessors = {
-        '#': '<div class="block solid"></div>'
+        '#': '<div class="block solid"></div>',
+        '|': '<div class="block door vertical closed"></div>',
+        '-': '<div class="block door horizontal closed"></div>'
     }
 
     function TerrainBlock(data){
