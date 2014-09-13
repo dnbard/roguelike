@@ -20,6 +20,7 @@ define([
 
                 self.currentLevel = levelProvider.get();
                 self.currentLevel.init($(element.find('layer[data-type="terrain"]')));
+                pubsub.publish(events.LEVEL.CHANGE, self.currentLevel);
 
                 player = playerProvider.get();
                 player.setLevel(self.currentLevel, $(element.find('layer[data-type="characters"]')));

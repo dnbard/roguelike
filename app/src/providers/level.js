@@ -1,6 +1,10 @@
 define([
-    'game/level'
-], function(Level){
+    'game/level',
+    'pubsub',
+    'enums/events'
+], function(Level, pubsub, events){
+    var currentLevel = null;
+
     function LevelProvider(){
 
     }
@@ -23,6 +27,14 @@ define([
             height: 10
         });
     }
+
+    LevelProvider.prototype.current = function(){
+        return currentLevel;
+    }
+
+    pubsub.subscribe(events.LEVEL.CHANGE, function(event, level){
+        currentLevel = level;
+    });
 
     return LevelProvider;
 });

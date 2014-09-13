@@ -1,6 +1,9 @@
 define({
-    'PAGE': {
-        'SHOW': 'page.show',
-        'HIDE': 'page.hide',
+    PAGE: {
+        SHOW: 'page.show',
+        HIDE: 'page.hide',
+    },
+    LEVEL: {
+        CHANGE: 'level.change'
     }
 });
