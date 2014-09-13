@@ -25,11 +25,11 @@ function Application(){
         }
     }
 
-    new Block(this.container, {
-        x: i - 1,
-        y: j - 1,
-        content: '@'
-    });
+//    new Block(this.container, {
+//        x: i - 1,
+//        y: j - 1,
+//        content: '@'
+//    });
 
     this.mousedown = function(event){
         self.container.on('mousemove', self.mousemove);
