@@ -2,7 +2,7 @@ define([
     'services/page'
 ], function(PageService){
     function Application(){
-        PageService.activate('view');
+        PageService.activate('mainmenu');
     }
 
     return Application;

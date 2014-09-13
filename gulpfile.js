@@ -53,7 +53,7 @@ gulp.task('default', [
     'js',
     'browser-sync'
 ], function () {
-    gulp.watch("app/**", [
+    gulp.watch(['app/*', 'app/**/*'], [
         'copy',
         'less',
         'js',

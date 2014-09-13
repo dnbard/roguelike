@@ -12,7 +12,8 @@ define([
 
         _.each(pages, function(page){
             var $page = $(page),
-                pageId = $page.attr('id');
+                pageId = $page.attr('id'),
+                viewmodelName = $page.attr('viewmodel');
 
             if (!pageId || typeof pageId !== 'string' || self.pages[pageId]){
                 throw new Error('Page must have an uniue ID');
@@ -25,6 +26,13 @@ define([
                 content: $page.html(),
                 isActive: false
             };
+
+            //load viewmodel
+            if (viewmodelName){
+                require(['viewModels/' + viewmodelName], function(Viewmodel){
+                    self.pages[pageId].viewmodel = new Viewmodel($page);
+                });
+            }
 
             $page.html('');
         });
