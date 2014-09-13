@@ -3,7 +3,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     browserify = require('gulp-browserify'),
     clean = require('gulp-clean'),
-    less = require('gulp-less');
+    less = require('gulp-less'),
+    fileinclude = require('gulp-file-include');
 
 var bases = {
     app: 'app/',
@@ -30,6 +31,10 @@ gulp.task('js', function () {
 
 gulp.task('copy', function(){
     gulp.src(paths.html, {cwd: bases.app})
+        .pipe(fileinclude({
+          prefix: '@@',
+          basepath: '@file'
+        }))
         .pipe(gulp.dest(bases.dist));
 
     gulp.src(paths.fonts, {cwd: bases.app})

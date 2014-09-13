@@ -1,7 +1,8 @@
 require.config({
     baseUrl: 'src',
     paths: {
-        app: './app'
+        app: './app',
+        jquery: 'http://cdn.jsdelivr.net/jquery/2.1.1/jquery.min'
     }
 });
 
