@@ -24,15 +24,8 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('js', function () {
-    return gulp.src('app/src/app.js')
-        .pipe(browserify())
-        .pipe(uglify())
+    return gulp.src(['app/src/*'])
         .pipe(gulp.dest('build/src'));
-});
-
-gulp.task('clean', function(){
-    return gulp.src('build/*')
-        .pipe(clean());
 });
 
 gulp.task('copy', function(){
@@ -49,11 +42,10 @@ gulp.task('less', function(){
         .pipe(gulp.dest('build/css'));
 });
 
-gulp.task('build', ['copy', 'less', 'js'], function(){ });
-
 gulp.task('default', [
-    'clean',
-    'build',
+    'copy',
+    'less',
+    'js',
     'browser-sync'
 ], function () {
     gulp.watch("app/**", [

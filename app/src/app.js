@@ -1,3 +1,7 @@
-var _ = require('./module.js');
+define(function(){
+    function Application(){
 
-_.init();
+    }
+
+    return Application;
+});
