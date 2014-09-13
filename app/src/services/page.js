@@ -1,7 +1,9 @@
 define([
     'jquery',
-    'lodash'
-], function( $, _ ){
+    'lodash',
+    'pubsub',
+    'enums/events'
+], function( $, _, pubsub, events ){
     function PageService(){
         var pages = $('.page'),
             count = pages.length,
@@ -51,13 +53,15 @@ define([
         if (this.activePage){
             $('#' + this.activePage.id).html('');
             this.activePage.isActive = false;
+
+            pubsub.publish(events.PAGE.HIDE, this.activePage);
         }
 
         this.activePage = this.pages[pageId];
 
-
         $('#' + this.activePage.id).html(this.activePage.content);
         this.activePage.isActive = true;
+        pubsub.publish(events.PAGE.SHOW, this.activePage);
 
         return this.activePage;
     }

@@ -6,7 +6,7 @@ define([
         this.init(element, this);
 
         this.startGame = function(event){
-            PageService.activate('111');
+            PageService.activate('game');
         }
     }
 
