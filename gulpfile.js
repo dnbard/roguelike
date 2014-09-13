@@ -25,7 +25,7 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('js', function () {
-    return gulp.src(['app/src/*'])
+    return gulp.src(['app/src/*', 'app/src/*/*'])
         .pipe(gulp.dest('build/src'));
 });
 
