@@ -30,5 +30,10 @@ define([
         return !!terrainProcessors[source];
     }
 
+    TerrainBlock.prototype.setVisible = function(){
+        this.element.removeClass('viewed-none');
+        this.element.addClass('visited');
+    }
+
     return TerrainBlock;
 });

@@ -8,6 +8,9 @@
     overflow: hidden;
     text-align: center;
     font-size: 11pt;
+    opacity: 1;
+
+    .transition();
 }
 
 .block.solid{
@@ -29,4 +32,12 @@
     left: 3px;
     font-size: 23pt;
     transform: rotate(90deg);
+}
+
+.block.viewed-none{
+    opacity: 0;
+}
+
+.block.viewed-none.visited{
+    opacity: 0.25;
 }

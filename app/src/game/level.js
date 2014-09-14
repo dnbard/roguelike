@@ -34,6 +34,22 @@ define([
                 y++;
             }
         }, this);
+
+        this.element = element;
+
+        this.setAllTilesNotViewed();
+    }
+
+    Level.prototype.setAllTilesNotViewed = function(){
+        this.element.find('*').addClass('viewed-none');
+    }
+
+    Level.prototype.setTileVisible = function(x, y){
+        var tile = this.map[this.getMapIndex(x, y)];
+
+        if (tile){
+            tile.setVisible();
+        }
     }
 
     Level.prototype.getMapIndex = function(x, y){

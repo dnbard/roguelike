@@ -21,6 +21,10 @@ define([
 
         this.element.css('left', this.x * 16);
         this.element.css('top', this.y * 16);
+
+        setTimeout(_.bind(function(){
+            this.LOS();
+        }, this));
     }
 
     Character.prototype.dispose = function(){
@@ -45,6 +49,22 @@ define([
 
         this.element.css('left', this.x * 16);
         this.element.css('top', this.y * 16);
+
+        this.LOS();
+    }
+
+    Character.prototype.LOS = function(){
+        var level = new LevelProvider().current(),
+            x = this.x,
+            y = this.y;
+
+        level.setAllTilesNotViewed();
+
+        for(var i = x - 4; i < x + 4; i++){
+            for(var j = y - 4; j < y + 4; j++){
+                level.setTileVisible(i, j);
+            }
+        }
     }
 
     return Character;
