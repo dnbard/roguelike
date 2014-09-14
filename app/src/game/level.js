@@ -1,7 +1,8 @@
 define([
     'lodash',
-    'game/terrainBlock'
-], function( _, TerrainBlock){
+    'game/terrainBlock',
+    'vendor/lightSource'
+], function( _, TerrainBlock, LightSource ){
     function Level(data){
         if (!data || !data.source || !_.isNumber(data.width) || !_.isNumber(data.height)){
             throw new Error('Level cannot be empty');
@@ -12,6 +13,8 @@ define([
         this.height = data.height;
 
         this.map = {};
+
+        this.lightGeometry = null;
     }
 
     Level.prototype.init = function(element){
@@ -61,6 +64,28 @@ define([
 
     Level.prototype.isPassable = function(x, y){
         return !this.map[this.getMapIndex(x, y)];
+    }
+
+    Level.prototype.calculateLightGeometry = function(){
+        var self = this;
+
+        this.lightGeometry = new LightSource({
+            radius: 12,
+            mapSize: {
+                x: 32,
+                y: 10
+            },
+            getLightLevel: function(x, y){
+                return !self.isPassable(x, y);
+            }
+        });
+    }
+
+    Level.prototype.getLightGeometry = function(){
+        if (this.lightGeometry === null){
+            this.calculateLightGeometry();
+        }
+        return this.lightGeometry;
     }
 
     return Level;

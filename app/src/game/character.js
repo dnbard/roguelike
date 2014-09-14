@@ -56,48 +56,17 @@ define([
     Character.prototype.LOS = function(){
         var level = new LevelProvider().current(),
             x = this.x,
-            y = this.y;
+            y = this.y,
+            lightResults;
 
         level.setAllTilesNotViewed();
-        var tilesToCheck = [];
+        lightResults = level.getLightGeometry().update(x, y);
 
-        for(var i = x - 16; i < x + 16; i++){
-            tilesToCheck.push({x: i, y: y - 16});
-            tilesToCheck.push({x: i, y: y + 16});
-        }
-
-        for(var j = y - 16; j < y + 16; j++){
-            tilesToCheck.push({x: x + 16, y: j});
-            tilesToCheck.push({x: x - 16, y: j});
-        }
-
-        while(tilesToCheck.length > 0){
-            var tile = tilesToCheck.pop(),
-                distX = (tile.x - x),
-                distY = (tile.y - y),
-                max = Math.max(Math.abs(distX), Math.abs(distY)),
-                dx = distX / max,
-                dy = distY / max,
-                dMax = Math.max(Math.abs(dx), Math.abs(dy)),
-                cx = x + 0.5,
-                cy = y + 0.5,
-                traveled = 0;
-
-            while(traveled <= max){
-                cx += dx / 2;
-                cy += dy / 2;
-
-                //FIXME: AHHHHGRH! This is ugly
-                level.setTileVisible(Math.floor( cx ), Math.floor( cy ));
-                level.setTileVisible(Math.ceil( cx ), Math.ceil( cy ));
-
-                if(level.setTileVisible(Math.round( cx ), Math.round( cy ))){
-                    break;
-                }
-
-                traveled += dMax / 2;
+        _.each(lightResults, function(tile){
+            if(tile.lightLevel > 0){
+                level.setTileVisible(tile.x, tile.y);
             }
-        }
+        });
     }
 
     return Character;
