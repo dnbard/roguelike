@@ -1,8 +1,9 @@
 define([
     'lodash',
     'pubsub',
+    'services/commands',
     'enums/events'
-], function( _, pubsub, events ){
+], function( _, pubsub, commandService, events ){
     function Character(){
         this.x = 1;
         this.y = 1;
@@ -25,6 +26,8 @@ define([
         _.each(this.tokens, function(token){
             if (token.type === 'pubsub'){
                 pubsub.unsubsribe(token.id);
+            } else if (token.type === 'command'){
+                commandService.unsubsribe(token.id);
             }
         });
     }

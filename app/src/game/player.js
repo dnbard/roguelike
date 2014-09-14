@@ -1,37 +1,54 @@
 define([
     'game/character',
-    'pubsub',
-    'enums/events'
-], function(Character, pubsub, events){
+    'services/commands',
+    'enums/commands'
+], function(Character, commandService, commands){
     function Player(){
         var self = this;
 
         this.tokens.push({
-            id: pubsub.subscribe(events.KEY.DOWN + '.D', function(){
-                self.move(1, 0);
-            }),
-            type: 'pubsub'
+            id: commandService.subscribe(commands.PLAYER.MOVE1, function(){ self.move(-1, 1); }),
+            type: 'command'
         });
 
         this.tokens.push({
-            id: pubsub.subscribe(events.KEY.DOWN + '.A', function(){
-                self.move( -1, 0);
-            }),
-            type: 'pubsub'
+            id: commandService.subscribe(commands.PLAYER.MOVE2, function(){ self.move(0, 1); }),
+            type: 'command'
         });
 
         this.tokens.push({
-            id: pubsub.subscribe(events.KEY.DOWN + '.W', function(){
-                self.move(0, -1);
-            }),
-            type: 'pubsub'
+            id: commandService.subscribe(commands.PLAYER.MOVE3, function(){ self.move(1, 1); }),
+            type: 'command'
         });
 
         this.tokens.push({
-            id: pubsub.subscribe(events.KEY.DOWN + '.S', function(){
-                self.move(0, 1);
-            }),
-            type: 'pubsub'
+            id: commandService.subscribe(commands.PLAYER.MOVE4, function(){ self.move(-1, 0); }),
+            type: 'command'
+        });
+
+        this.tokens.push({
+            id: commandService.subscribe(commands.PLAYER.MOVE5, function(){ self.move(0, 0); }),
+            type: 'command'
+        });
+
+        this.tokens.push({
+            id: commandService.subscribe(commands.PLAYER.MOVE6, function(){ self.move(1, 0); }),
+            type: 'command'
+        });
+
+        this.tokens.push({
+            id: commandService.subscribe(commands.PLAYER.MOVE7, function(){ self.move(-1, -1); }),
+            type: 'command'
+        });
+
+        this.tokens.push({
+            id: commandService.subscribe(commands.PLAYER.MOVE8, function(){ self.move(0, -1); }),
+            type: 'command'
+        });
+
+        this.tokens.push({
+            id: commandService.subscribe(commands.PLAYER.MOVE9, function(){ self.move(1, -1); }),
+            type: 'command'
         });
     }
 
