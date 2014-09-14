@@ -16,7 +16,7 @@ define([
 
             console.log('keydown: %s (%s)', char, keyCode);
 
-            if (char && (!this.pressed[char] || rightNow - this.pressed[char].timestamp > 250)){
+            if (char && (!this.pressed[char] || rightNow - this.pressed[char].timestamp > 150)){
                 this.pressed[char] = {
                     timestamp: rightNow
                 }

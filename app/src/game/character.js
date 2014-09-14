@@ -2,8 +2,9 @@ define([
     'lodash',
     'pubsub',
     'services/commands',
-    'enums/events'
-], function( _, pubsub, commandService, events ){
+    'enums/events',
+    'providers/level'
+], function( _, pubsub, commandService, events, LevelProvider ){
     function Character(){
         this.x = 1;
         this.y = 1;
@@ -33,6 +34,12 @@ define([
     }
 
     Character.prototype.move = function(offsetX, offsetY){
+        var level = new LevelProvider().current();
+
+        if (!level.isPassable(this.x + offsetX, this.y + offsetY)){
+            return;
+        }
+
         this.x += offsetX;
         this.y += offsetY;
 

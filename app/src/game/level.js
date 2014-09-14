@@ -19,7 +19,7 @@ define([
 
         _.each(this.source, function(char){
             if (TerrainBlock.isNeedProcess(char)){
-                this.map[x + ',' + y] = new TerrainBlock({
+                this.map[this.getMapIndex(x, y)] = new TerrainBlock({
                     source: char,
                     parent: element,
                     x: x,
@@ -34,6 +34,14 @@ define([
                 y++;
             }
         }, this);
+    }
+
+    Level.prototype.getMapIndex = function(x, y){
+        return x + ',' + y;
+    }
+
+    Level.prototype.isPassable = function(x, y){
+        return !this.map[this.getMapIndex(x, y)];
     }
 
     return Level;
