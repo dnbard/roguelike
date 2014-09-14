@@ -21,7 +21,7 @@ define([
                     timestamp: rightNow
                 }
 
-                pubsub.publish(events.KEY.DOWN, char);
+                pubsub.publish(events.KEY.DOWN + '.' + char, char);
             }
         }, this));
 
@@ -33,7 +33,7 @@ define([
 
             if (char){
                 this.pressed[char] = null;
-                pubsub.publish(events.KEY.UP, char);
+                pubsub.publish(events.KEY.UP + '.' + char, char);
             }
         }, this));
     }
