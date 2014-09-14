@@ -49,7 +49,10 @@ define([
 
         if (tile){
             tile.setVisible();
+            return true;
         }
+
+        return false;
     }
 
     Level.prototype.getMapIndex = function(x, y){
