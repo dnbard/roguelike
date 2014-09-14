@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     uglify = require('gulp-uglify'),
-    browserify = require('gulp-browserify'),
     clean = require('gulp-clean'),
     less = require('gulp-less'),
     fileinclude = require('gulp-file-include');
